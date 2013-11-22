@@ -52,7 +52,12 @@
  * 
  * @return {Number} факториал числа.
  */
-
+ function factorial(n){
+  if ((n == 0) || (n == 1))
+    return 1;
+  else
+    return (n * factorial(n - 1));
+}
 /**
  * Задание 2. Создать функцию nfib для подсчета n-го числа Фибоначчи
  * (http://ru.wikipedia.org/wiki/Числа_Фибоначчи)
@@ -67,3 +72,22 @@
  *
  * @return {Number} Число Фибоначчи.
  */
+function nfib(n) {
+	if(n < 2) {
+    	return n;
+	} else {
+    	return nfib( n - 1) + nfib( n - 2 ); 
+	}
+}
+
+//function nfib(n) {
+//  if(n==1) {
+//  	return 1;
+//  }  
+//  else if (n==2){
+//  	return 1;
+//  } 
+//  else {
+ // 	return nfib(n-1) + nfib(n-2);
+//  }     
+//} 
