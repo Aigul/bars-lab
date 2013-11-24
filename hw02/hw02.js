@@ -20,6 +20,14 @@ function Warrior(name, level){
   // Ваш код здесь...
   this.name = name;
   this.level = level;
+  this.getCode = function(){
+  	if (this.sideOfForce == "light") {
+  		return "Нет волнения — есть покой...";
+  	}
+  	if (this.sideOfForce == "dark") {
+  		return "Спокойствие — ложь, есть только страсть...";
+  	}
+  }
 }
 
 /**
@@ -37,6 +45,7 @@ function Warrior(name, level){
  */
 Warrior.prototype.attack = function() {
   // Ваш код здесь...
+	return this.level * 0.1; 
 };
 
 /**
@@ -53,18 +62,25 @@ Warrior.prototype.attack = function() {
  * @param {String} name Имя джедая.
  * @param {Number} level Уровень джедая.
  */
+Jedi.prototype = new Warrior();
 function Jedi (name, level) {
   // Ваш код здесь...
+	this.name = name;
+	this.level = level;
+	this.sideOfForce = "light";
 }
-
 /**
  * Создает экземпляр ситха
  * @param {String} name Имя ситха.
  * @param {Number} level Уровень ситха.
  */
 // Ваш код здесь...
-
-
+Sith.prototype = new Warrior();
+function Sith (name, level) {
+	this.name = name;
+    this.level = level;
+    this.sideOfForce = "dark";   
+}
 /**
  * Метод произнесения кодекса.
  * @example
@@ -97,7 +113,19 @@ function Jedi (name, level) {
  * Если призываемый объект не является ситхом, выкидывается исключение.
  */
 // Ваш код здесь...
-
+Jedi.prototype.toLightSide = function(sith) {
+		if (sith instanceof Sith) {
+			if (sith.level < this.level) {
+				sith.sideOfForce = "light";
+			}
+			else {
+				sith.toDarkSide(this);
+			}
+		}
+		else {
+			throw Error("Invalid argument");
+		}
+	}
 
 /**
  * Задание 5. Добавить метод toDarkSide классу Sith.
@@ -118,3 +146,16 @@ function Jedi (name, level) {
  * Если призываемый объект не является джедаем, выкидывается исключение.
  */
 // Ваш код здесь...
+Sith.prototype.toDarkSide = function(jedi) {
+		if (jedi instanceof Jedi) {
+			if (jedi.level < this.level) {
+				jedi.sideOfForce  = "dark";
+			}
+			else {
+				jedi.toLightSide(this);
+			}
+		}
+		else {
+			throw Error("Invalid argument");
+		}
+	}
