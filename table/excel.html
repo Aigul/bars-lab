@@ -11,18 +11,17 @@
 		function createTable(){
 			var body = document.getElementsByTagName('body')[0];
 			var table = document.createElement('table');
-			table.innerHTML = table.innerHTML + '<table id ="table" bordercolor="#FFFF00" border ="1px" width=100% frame="border"></table>';
 			table.id = 'table';
 			body.appendChild(table);
 		}
 		function addRow(){
-			var tabl = document.getElementById('table');
+			var table = document.getElementById('table');
 			var rowThere = document.getElementById('row');
 			var row = document.createElement('tr');
 			var input;
 			row.id = 'row';
 			if(!rowThere){
-				tabl.appendChild(row);
+				table.appendChild(row);
 			}else{
 				var elements = rowThere.getElementsByTagName('*');
 				for(var i = 0; i < elements.length/2; i++){
@@ -30,15 +29,15 @@
 					input = document.createElement('input');
 					input.id = 'column';
 					input.readOnly = 1;
+					input.ondblclick = doubleClick;
 					td.appendChild(input);
 					row.appendChild(td);
 				}
-				tabl.appendChild(row);
+				table.appendChild(row);
 			}
 		}
 		function addColumn(){
 			var tr = document.getElementsByTagName('tr');
-			var bd = document.getElementsByTagName('body')[0];
 			var td;
 			var input;
 			for(var i = 0; i < tr.length; i++){
@@ -53,14 +52,14 @@
 		}
 		function doubleClick(){
 			this.style.cursor = 'none';
-			this.style.padding = 8;
+			this.style.padding = 4;
 			this.readOnly = 0;
 			}
 		function oneClick(){
 			var input = document.getElementsByTagName('input');
 			for(var i = 0;i <document.getElementsByTagName('input').length; i++){
 				input[i].style.cursor = 'default';
-				input[i].style.padding = 5;
+				input[i].style.padding = 1;
 				input[i].readOnly = 1; 
 			} 
 		}

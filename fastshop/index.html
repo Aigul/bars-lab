@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" ng-app>
+<head>
+	<meta charset="utf-8" />
+	<!--[if lt IE 9]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+	<title></title>
+	<meta name="keywords" content="" />
+	<meta name="description" content="" />
+	<link href="style.css" rel="stylesheet">
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.6/angular.min.js"></script>
+  	<script src="src/Controller.js"></script>
+</head>
+
+<body ng-controller="ListCtrl">
+
+<div class="wrapper">
+
+	<header class="header">
+		<div class="logo">
+			<span class="first">fast</span><span class="second">Shop</span>
+		</div>
+	</header><!-- .header-->
+
+	<div class="middle">
+
+		<div class="container">
+			<main class="content">
+				<ul class="items">
+					<li ng-repeat="computer in computers">
+						<div class="item" ng-dblclick="addComp(computer)">
+							<img ng-src="src/img/{{computer.img}}">
+							<div class="item-name">{{computer.name}}</div>
+							<div class="item-price">{{computer.price}} руб.</div>
+						</div>
+					</li>
+				</ul>
+			</main><!-- .content -->
+		</div><!-- .container-->
+
+		<aside class="right-sidebar">
+			<div class="basket">
+				<div class="basket-title">Корзина</div>
+				<ul class="basket-content">
+					<li ng-repeat="computer in baskets">
+						<div class="item" ng-dblclick="removeComp(computer)">
+							<p>{{computer.name}}</p>
+							<p>{{computer.price}} руб.</p>
+						</div>
+					</li>
+				</ul>
+				<div class="basket-sum">Общая сумма: {{price}} руб.</div>
+			</div>
+		</aside><!-- .right-sidebar -->
+
+	</div><!-- .middle-->
+
+</div><!-- .wrapper -->
+
+</body>
+</html>
