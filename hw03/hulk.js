@@ -51,14 +51,14 @@ this.append = function(tagName) {
  * @param {Number/String} [value] Значение атрибута.
  */
 this.attr = function(attrName, value) {
-
+	
 };
 
 /**
  * @method children
  * Возвращает всех непосредственных наследников первого элемента из выборки, обернутых в hulk-объект.
  */
-this.children = function () {
+this.children = function() {
 	return this.element[0].querySelectorAll('*');
 };
 
@@ -69,16 +69,37 @@ this.children = function () {
  * @param {Number/String} value Значение css-атрибута.
  */
 
+this.css = function(cssAttrName,value) {
+
+};
+
 /**
  * @method empty
  * Очищает все внутреннее содержимое элементов из выборки.
  */
+
+this.empty = function() {
+	for (var i = 0; i < this.element.length; i++) {
+		 this.element[i].innerHTML = '';
+	}
+};
 
 /**
  * @method find
  * Производит выборку по дочерним элементам выборки, удовлетворяющим переданному селектору.
  * @param {String} selector css-селектор для выборки.
  */
+
+this.find = function(selector) {
+	var array = [];
+	for (var i = 0; i < this.element.length; i++) {
+		var mass = this.element[i].querySelectorAll(selector);
+		for (var j = 0; j < mass.length; j++) {
+			array.push(mass[j]);
+		}
+	}
+	return array;
+};
 
 /**
  * @method hasClass
@@ -87,11 +108,24 @@ this.children = function () {
  * @return {Boolean} Возвращает true, если все элементы выборки содержат переданный класс.
  */
 
+this.hasClass = function(className) {
+	for (var i = 0; i < this.element.length; i++) {
+		if (className !== this.element[i].className) {
+			return false;
+		}
+		return true;
+	}
+};
+
 /**
  * @method html
  * Возвращает html-содержимое первого элемента выборки.
  * @return {HTMLElement} html-содержимое первого элемента из выборки.
  */
+
+this.html = function() {
+	return this.element[0].innerHTML;
+};
 
 /**
  * @method on
@@ -100,15 +134,31 @@ this.children = function () {
  * @param {Function} func Функция-подписчик.
  */
 
+this.on = function(eventName,func) {
+	for (var i = 0; i < this.element.length; i++) {
+		this.element[i].addEventListener(eventName,func);
+	}
+};
+
 /**
  * @method parent
  * Возвращает родительский элемент первого элемента выборки.
  */
 
+this.parent = function() {
+	return this.element[0].parentNode;
+};
+
 /**
  * @method remove
  * Удаляет из документа все DOM-элементы выборки.
  */
+
+this.remove = function() {
+	for (var i = 0; i < this.element.length; i++) {
+		this.element[i].remove();
+	}
+};
 
 /**
  * @method removeAttr
@@ -116,17 +166,40 @@ this.children = function () {
  * @param {String} attrName Удаляемый атрибут.
  */
 
+this.removeAttr = function(attrName) {
+	for (var i = 0; i < this.element.length; i++) {
+		this.element[i].removeAttribute(attrName);
+	}
+};
+
 /**
  * @method removeClass
  * Удаляет css-классы для элементов выборки.
  * @param {String} clsNames Имена классов, разделенных пробелом.
  */
 
+this.removeClass = function(clsNames) {
+	for (var i = 0; i < this.element.length; i++) {
+		this.element[i].removeAttribute("class");
+	}
+};
+
 /**
  * @method toggleClass
  * Добавляет (если классы отсутствуют) и удаляет (если классы присутствуют) у элементов выборки.
  * @param {String} clsNames Имена классов, разделенных пробелом.
  */
+
+this.toggleClass = function(clsNames) {
+	for (var i = 0; i < this.element.length; i++) {
+		if(this.element[i].className.indexOf(clsNames) < 0) {
+			this.element[i].className += " " + clsNames;
+		}
+		else {
+			this.element[i].className = this.element[i].removeAttribute(clsNames);
+		}
+	}
+};
 
 /**
  * @method unbind
@@ -135,8 +208,22 @@ this.children = function () {
  * @param {Function} func Удаляемая функция-подписчик.
  */
 
+this.unbind = function(eventName,func) {
+	for (var i = 0; i < this.element.length; i++) {
+		this.element[i].removeEventListener(eventName,func);
+	}
+};
+
 /**
  * @method wrap
  * Оборачивает каждый элемент выборки тегом, имя которого передано в качестве первого аргумента.
  * @param {String} tagName Имя тега.
  */
+
+ this.wrap = function(tagName) {
+ 	for (var i = 0; i < this.element.length; i++) {
+		var tag = document.createElement(tagName);
+		tag.appendChild(this.element[i]);
+		this.element[i].parentNode.appendChild(tag);
+	}
+ };
