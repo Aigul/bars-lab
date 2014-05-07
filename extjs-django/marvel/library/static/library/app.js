@@ -1,9 +1,9 @@
 Ext.application({
   name: 'Lib',
   appFolder: '/static/library/app',
-  controllers: ['Main', 'Genre'],
+  controllers: ['Main', 'Genre', 'Author'],
   views: ['Main'],
-  models: ['Genre'],
+  models: ['Genre', 'Author'],
 
   launch: function() {
     Ext.create('Ext.container.Viewport', {

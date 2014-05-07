@@ -38,8 +38,34 @@ Ext.define('Lib.view.Main', {
         }]
       }]
     }, {
-      title: 'Авторы',
-      itemId: 'authors'
+      title: 'Авторы', 
+      xtype : 'grid',
+      itemId: 'authors',
+      store: 'Author',
+      columns: [{
+        text: 'Фамилия',
+        dataIndex: 'first_name',
+        flex: 1
+      },
+      {
+        text: 'Имя',
+        dataIndex: 'middle_name',
+        flex: 2
+        },
+      {
+        text: 'Отчество',
+        dataIndex: 'last_name',
+        flex: 3
+      }],
+      dockedItems: [{
+        xtype: 'toolbar',
+        dock: 'top',
+        items: [{
+          xtype: 'button',
+          action: 'add',
+          text: 'Добавить'
+        }]
+      }]
     }]
   }]
 });

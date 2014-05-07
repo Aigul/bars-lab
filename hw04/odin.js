@@ -3,7 +3,31 @@
  * Позволяет определять классы, добавлять поля, методы (экземпляра и статические),
  * наследовать один класс от другого, создавать экземпляры класса.
  */
+function Odin(){}
+Odin.define = function(a,b){
+    window[a] = function(){
+        for(var i in b.fields){
+            this[i] = b.fields[i];
+        }
+        for(var i in b.methods){
+            this[i] = b.methods[i];
+        }
+    }
+    for(var i in b.staticFields){
+        window[a][i] = b.staticFields[i];
+    }
+    for(var i in b.staticMethods){
+        window[a][i] = b.staticMethods[i];
+    }
 
+}
+Odin.create = function(a,b){
+    var myObj = new window[a];
+    for(var i in b){
+        myObj[i] = b[i];
+    }
+    return myObj;
+}
 /**
  * @method Odin.def
  * Объявление класса.
@@ -43,16 +67,16 @@
  *      var myClass = Odin.create('MyClass');
  *      myClass.greeting(); // В консоли должно быть напечатано 'Bonjour, MyClass'
  *
- * @param {String} className Имя класса
- * @param {Object} config Объект, содержащий конфигурацию объявляемого класса.
- */
+ * @param className Имя класса
+ * @param config Объект, содержащий конфигурацию объявляемого класса.
+*/
 
 /**
  * @method Odin.create
  * Создание экземпляра класса.
- * @param {String} className Имя класса
- * @params {Object} config Объект, содержащий конфигурацию создаваемого экземпляра.
+ * @param className Имя класса
+ * @params config Объект, содержащий конфигурацию создаваемого экземпляра.
  * При создании объекта будет передан в конструктор класса.
  * @example
  *     Odin.create('MyClass', {name: 'Odin'});
- */
+*/
